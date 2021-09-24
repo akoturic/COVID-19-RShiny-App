@@ -1,7 +1,6 @@
 library(forecast)
 library(ggplot2)
 library(plotly)
-
 ################################################################################
 
 model <- function(pocetak, kraj){

@@ -16,6 +16,9 @@ json_to_csv <- function(url){
 podaci_hrv <- json_to_csv(url = "https://www.koronavirus.hr/json/?action=podaci")
 podaci_hrv[,11] <- round_date(as.Date(podaci_hrv[,11], origin='01-01-1997'), "day")
 podaci_hrv <- podaci_hrv %>% mutate_if(is.character,as.numeric)
+podaci_hrv <- podaci_hrv[rev(order(podaci_hrv$Datum)),]
+
+
 slucajevi_hr <- data.frame(podaci_hrv$SlucajeviHrvatska[1]-podaci_hrv$SlucajeviHrvatska[2])
 svijet <- data.frame(podaci_hrv$SlucajeviSvijet[1]-podaci_hrv$SlucajeviSvijet[2])
 for(x in 2:(length(podaci_hrv$SlucajeviHrvatska)-1)){

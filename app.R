@@ -87,6 +87,8 @@ server <- function(input, output, session) {
   })
   
   output$graf_predvidanje  <- renderPlotly({
+    req(input$pocetak)
+    req(input$kraj)
     model(input$pocetak[1], input$kraj[1])
   })
 }
