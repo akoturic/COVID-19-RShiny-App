@@ -73,7 +73,7 @@ server <- function(input, output, session) {
   output$pocetak <- renderUI({
     dateInput('pocetak',
               label = "Početak predikcije:",
-              value = as.Date("2021-08-23"),
+              value = Sys.Date()-1,
               min = as.Date("2020-10-01"),
               max = Sys.Date()-1)
   })
@@ -81,7 +81,7 @@ server <- function(input, output, session) {
   output$kraj <- renderUI({
     dateInput('kraj',
               label = "Kraj predikcije:",
-              value = as.Date("2021-09-23"),
+              value = Sys.Date()+7,
               min = input$pocetak + 5,
     )
   })
