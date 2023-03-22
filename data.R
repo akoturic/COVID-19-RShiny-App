@@ -1,7 +1,8 @@
 library(jsonlite)
 library(lubridate)
 library(dplyr)
-
+library(padr)
+library(zoo)
 ################################################################################
 
 #pretvara json file u csv file
@@ -16,6 +17,8 @@ json_to_csv <- function(url){
 podaci_hrv <- json_to_csv(url = "https://www.koronavirus.hr/json/?action=podaci")
 podaci_hrv[,11] <- round_date(as.Date(podaci_hrv[,11], origin='01-01-1997'), "day")
 podaci_hrv <- podaci_hrv %>% mutate_if(is.character,as.numeric)
+podaci_hrv <- pad(podaci_hrv)
+podaci_hrv <- na.locf(na.locf(podaci_hrv),fromLast=TRUE)
 podaci_hrv <- podaci_hrv[rev(order(podaci_hrv$Datum)),]
 
 
